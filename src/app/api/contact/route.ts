@@ -16,7 +16,9 @@ export async function GET() {
     ok: status.resendConfigured || status.smtpConfigured,
     ...status,
     note: status.resendConfigured
-      ? "With onboarding@resend.dev, Resend only delivers to the email on your Resend account until you verify celeriscreative.com."
+      ? status.from.includes("onboarding@resend.dev")
+        ? "Still using Resend's test From address. Verify celeriscreative.com in Resend and set EMAIL_FROM to an address on that domain (e.g. forms@celeriscreative.com)."
+        : "From uses your domain. Confirm celeriscreative.com is Verified in Resend (SPF/DKIM), then check Google Workspace Spam/Promotions for new form emails."
       : "RESEND_API_KEY is missing on this deployment.",
   });
 }
