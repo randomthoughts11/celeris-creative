@@ -50,7 +50,10 @@ function escapeHtml(value: string) {
 }
 
 async function sendWithResend(mail: ContactMail) {
-  const apiKey = process.env.RESEND_API_KEY?.trim();
+  const apiKey =
+    process.env.RESEND_API_KEY?.trim() ||
+    process.env.ResendAPIkey?.trim() ||
+    process.env.RESEND_APIKEY?.trim();
   if (!apiKey) return null;
 
   const from =
@@ -118,8 +121,13 @@ async function sendWithSmtp(mail: ContactMail) {
 }
 
 export function emailConfigStatus() {
+  const apiKey =
+    process.env.RESEND_API_KEY?.trim() ||
+    process.env.ResendAPIkey?.trim() ||
+    process.env.RESEND_APIKEY?.trim();
+
   return {
-    resendConfigured: Boolean(process.env.RESEND_API_KEY?.trim()),
+    resendConfigured: Boolean(apiKey),
     smtpConfigured: Boolean(
       process.env.SMTP_HOST?.trim() &&
         process.env.SMTP_USER?.trim() &&
@@ -130,6 +138,13 @@ export function emailConfigStatus() {
       process.env.EMAIL_FROM?.trim() ||
       process.env.RESEND_FROM?.trim() ||
       "Celeris Creative <onboarding@resend.dev>",
+    detectedKeyName: process.env.RESEND_API_KEY?.trim()
+      ? "RESEND_API_KEY"
+      : process.env.ResendAPIkey?.trim()
+        ? "ResendAPIkey"
+        : process.env.RESEND_APIKEY?.trim()
+          ? "RESEND_APIKEY"
+          : null,
   };
 }
 
@@ -137,13 +152,17 @@ export function emailConfigStatus() {
  * Prefers Resend, then SMTP. Delivers to CONTACT_TO_EMAIL or ganesh@.
  */
 export async function sendContactEmail(mail: ContactMail) {
+  const hasResendKey = Boolean(
+    process.env.RESEND_API_KEY?.trim() ||
+      process.env.ResendAPIkey?.trim() ||
+      process.env.RESEND_APIKEY?.trim()
+  );
+
   try {
     const viaResend = await sendWithResend(mail);
     if (viaResend) return viaResend;
   } catch (err) {
-    // If Resend is configured but fails, don't silently fall through —
-    // surface that error (SMTP is opt-in fallback only when Resend is absent).
-    if (process.env.RESEND_API_KEY?.trim()) {
+    if (hasResendKey) {
       throw err;
     }
   }
@@ -152,6 +171,6 @@ export async function sendContactEmail(mail: ContactMail) {
   if (viaSmtp) return viaSmtp;
 
   throw new Error(
-    "Email is not configured. Add RESEND_API_KEY (and EMAIL_FROM) in Vercel env, then redeploy."
+    "Email is not configured. In Vercel, the key must be named exactly RESEND_API_KEY (yours is currently named ResendAPIkey). Rename it, then redeploy."
   );
 }
