@@ -6,16 +6,25 @@ import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Reveal } from "@/components/ui/Reveal";
 import { STATS } from "@/lib/data";
 import { Counter } from "@/components/ui/Counter";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Work",
+export const metadata: Metadata = pageMetadata({
+  title: "Case Studies & Growth Results | Celeris Creative Work",
   description:
     "Case studies from Celeris Creative — growth systems, rebrands, and AI automation shipped for wellness, healthcare, media, and e-commerce brands.",
-};
+  path: "/work",
+});
 
 export default function WorkPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Work", path: "/work" },
+        ])}
+      />
       <PageHero
         eyebrow="Selected work"
         title="Proof over"

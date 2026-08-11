@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { Services } from "@/components/sections/Services";
@@ -9,10 +10,21 @@ import { Industries } from "@/components/sections/Industries";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
 import { FinalCTA } from "@/components/sections/FinalCTA";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema, pageMetadata, SEO_KEYWORDS } from "@/lib/seo";
+import { SITE } from "@/lib/data";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Celeris Creative — AI-Powered Growth Agency",
+  description: SITE.description,
+  path: "/",
+  keywords: [...SEO_KEYWORDS],
+});
 
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={faqSchema()} />
       <Hero />
       <TrustedBy />
       <Services />

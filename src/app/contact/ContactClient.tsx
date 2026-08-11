@@ -37,25 +37,57 @@ const EXPECT = [
 export function ContactClient() {
   const [selected, setSelected] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const toggle = (s: string) =>
     setSelected((prev) =>
       prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]
     );
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
+    setSending(true);
+
     const data = new FormData(e.currentTarget);
-    const name = String(data.get("name") ?? "");
-    const email = String(data.get("email") ?? "");
-    const message = String(data.get("message") ?? "");
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nInterested in: ${selected.join(", ") || "—"}\n\n${message}`
-    );
-    window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(
-      `Strategy call request — ${name}`
-    )}&body=${body}`;
-    setSubmitted(true);
+    const name = String(data.get("name") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const message = String(data.get("message") ?? "").trim();
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          interests: selected,
+        }),
+      });
+
+      const payload = (await res.json().catch(() => ({}))) as {
+        error?: string;
+      };
+
+      if (!res.ok) {
+        throw new Error(
+          payload.error ||
+            `Couldn't send. Email ${SITE.formEmail} directly.`
+        );
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : `Couldn't send. Email ${SITE.formEmail} directly.`
+      );
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -69,7 +101,6 @@ export function ContactClient() {
 
       <section className="mx-auto max-w-[1400px] px-6 pb-32 lg:px-10">
         <div className="grid gap-16 lg:grid-cols-[1.3fr_1fr]">
-          {/* Form */}
           <Reveal>
             <form
               onSubmit={onSubmit}
@@ -85,12 +116,15 @@ export function ContactClient() {
                     className="py-16 text-center"
                   >
                     <p className="font-display text-3xl font-semibold text-snow">
-                      Your email client should be open.
+                      Request sent.
                     </p>
                     <p className="mt-4 text-fog">
-                      Didn&rsquo;t work? Write to us directly at{" "}
-                      <a href={`mailto:${SITE.email}`} className="text-iris-soft underline">
-                        {SITE.email}
+                      We&rsquo;ll get back to you shortly. Prefer email?{" "}
+                      <a
+                        href={`mailto:${SITE.formEmail}`}
+                        className="text-iris-soft underline"
+                      >
+                        {SITE.formEmail}
                       </a>
                     </p>
                   </motion.div>
@@ -98,7 +132,10 @@ export function ContactClient() {
                   <motion.div key="form" exit={{ opacity: 0, y: -20 }}>
                     <div className="grid gap-8 sm:grid-cols-2">
                       <div>
-                        <label htmlFor="name" className="font-mono-label mb-3 block text-xs text-fog">
+                        <label
+                          htmlFor="name"
+                          className="font-mono-label mb-3 block text-xs text-fog"
+                        >
                           Your name
                         </label>
                         <input
@@ -111,7 +148,10 @@ export function ContactClient() {
                         />
                       </div>
                       <div>
-                        <label htmlFor="email" className="font-mono-label mb-3 block text-xs text-fog">
+                        <label
+                          htmlFor="email"
+                          className="font-mono-label mb-3 block text-xs text-fog"
+                        >
                           Email
                         </label>
                         <input
@@ -153,7 +193,10 @@ export function ContactClient() {
                     </fieldset>
 
                     <div className="mt-10">
-                      <label htmlFor="message" className="font-mono-label mb-3 block text-xs text-fog">
+                      <label
+                        htmlFor="message"
+                        className="font-mono-label mb-3 block text-xs text-fog"
+                      >
                         Tell us about your business
                       </label>
                       <textarea
@@ -165,16 +208,29 @@ export function ContactClient() {
                       />
                     </div>
 
+                    {error && (
+                      <p className="mt-6 text-sm text-red-300" role="alert">
+                        {error}
+                      </p>
+                    )}
+
                     <button
                       type="submit"
-                      className="group relative mt-12 inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-snow px-8 py-5 text-base font-medium text-ink transition-transform duration-300 hover:scale-[1.01] sm:w-auto"
+                      disabled={sending}
+                      className="group relative mt-12 inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-snow px-8 py-5 text-base font-medium text-ink transition-transform duration-300 hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
                     >
                       <span
                         aria-hidden
                         className="absolute inset-0 translate-y-full rounded-full bg-iris transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0"
                       />
-                      <span className="relative z-10">Request Strategy Call</span>
-                      <span aria-hidden className="relative z-10">→</span>
+                      <span className="relative z-10">
+                        {sending ? "Sending…" : "Request Strategy Call"}
+                      </span>
+                      {!sending && (
+                        <span aria-hidden className="relative z-10">
+                          →
+                        </span>
+                      )}
                     </button>
                   </motion.div>
                 )}
@@ -182,13 +238,12 @@ export function ContactClient() {
             </form>
           </Reveal>
 
-          {/* Side rail */}
           <div className="space-y-10">
             <Reveal delay={0.15}>
               <div>
-                <p className="font-mono-label mb-6 text-xs text-mist">
+                <h2 className="font-mono-label mb-6 text-xs text-mist">
                   What to expect
-                </p>
+                </h2>
                 <ul className="space-y-7">
                   {EXPECT.map((item, i) => (
                     <li key={item.title} className="flex gap-5">
@@ -213,12 +268,14 @@ export function ContactClient() {
               <div className="rounded-card border border-line bg-ink-2 p-8">
                 <p className="font-mono-label mb-4 text-xs text-mist">Direct</p>
                 <a
-                  href={`mailto:${SITE.email}`}
+                  href={`mailto:${SITE.formEmail}`}
                   className="font-display block text-xl font-semibold text-snow transition-colors hover:text-iris-soft"
                 >
-                  {SITE.email}
+                  {SITE.formEmail}
                 </a>
-                <p className="mt-4 text-sm leading-relaxed text-fog">{SITE.address}</p>
+                <p className="mt-4 text-sm leading-relaxed text-fog">
+                  {SITE.address}
+                </p>
               </div>
             </Reveal>
           </div>

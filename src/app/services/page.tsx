@@ -5,12 +5,15 @@ import { Reveal, SplitReveal } from "@/components/ui/Reveal";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Services",
+export const metadata: Metadata = pageMetadata({
+  title: "AI Marketing & Web Design Services | Celeris Creative",
   description:
     "AI automation, branding, web design, performance marketing, content systems, and lead generation — engineered as one growth system by Celeris Creative.",
-};
+  path: "/services",
+});
 
 const PLANS = [
   {
@@ -67,6 +70,12 @@ const PLANS = [
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+        ])}
+      />
       <PageHero
         eyebrow="Services"
         title="Capabilities built"

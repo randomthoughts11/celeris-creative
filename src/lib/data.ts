@@ -3,6 +3,8 @@ export const SITE = {
   legalName: "Celeris Creative Agency LLP",
   url: "https://www.celeriscreative.com",
   email: "admin@celeriscreative.com",
+  /** Inbox for every website form submission */
+  formEmail: "ganesh@celeriscreative.com",
   address: "700 E Park Blvd #208, Plano, TX 75074, United States",
   tagline: "The growth system behind ambitious brands.",
   description:

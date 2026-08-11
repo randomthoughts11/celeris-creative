@@ -10,7 +10,13 @@ import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { SITE } from "@/lib/data";
+import {
+  organizationSchema,
+  SEO_KEYWORDS,
+  websiteSchema,
+} from "@/lib/seo";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -45,28 +51,22 @@ export const metadata: Metadata = {
     template: "%s — Celeris Creative",
   },
   description: SITE.description,
-  keywords: [
-    "AI marketing agency",
-    "digital marketing agency Plano TX",
-    "AI automation agency",
-    "branding agency",
-    "web design agency",
-    "growth systems",
-    "wellness marketing",
-  ],
+  keywords: [...SEO_KEYWORDS],
+  alternates: { canonical: SITE.url },
+  robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     url: SITE.url,
     siteName: SITE.name,
     title: "Celeris Creative — AI-Powered Growth Agency",
     description: SITE.description,
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "Celeris Creative — AI-Powered Growth Agency",
     description: SITE.description,
   },
-  robots: { index: true, follow: true },
   verification: { google: "mlXPRl1OTLePX6b1bXWf00qb-Xj_L5Zs8jn8tpaSBSU" },
 };
 
@@ -74,25 +74,6 @@ export const viewport: Viewport = {
   themeColor: "#05050a",
   width: "device-width",
   initialScale: 1,
-};
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: SITE.legalName,
-  url: SITE.url,
-  email: SITE.email,
-  description: SITE.description,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "700 E Park Blvd #208",
-    addressLocality: "Plano",
-    addressRegion: "TX",
-    postalCode: "75074",
-    addressCountry: "US",
-  },
-  areaServed: "United States",
-  priceRange: "$350 - $1500+/month",
 };
 
 export default function RootLayout({
@@ -104,10 +85,7 @@ export default function RootLayout({
       className={`${bricolage.variable} ${instrument.variable} ${inter.variable} ${jetbrains.variable}`}
     >
       <body className="grain">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <JsonLd data={[organizationSchema(), websiteSchema()]} />
         <SmoothScroll>
           <CustomCursor />
           <Navbar />

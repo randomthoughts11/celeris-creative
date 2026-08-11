@@ -4,12 +4,15 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Process } from "@/components/sections/Process";
 import { FinalCTA } from "@/components/sections/FinalCTA";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About",
+export const metadata: Metadata = pageMetadata({
+  title: "About Celeris Creative — AI Marketing Agency in Plano, TX",
   description:
     "Celeris Creative is an AI-powered growth agency in Plano, TX. Designers, strategists, and automation engineers building growth systems for ambitious brands.",
-};
+  path: "/about",
+});
 
 const VALUES = [
   {
@@ -42,6 +45,12 @@ const VALUES = [
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ])}
+      />
       <PageHero
         eyebrow="About us"
         title="Built for the brands"
