@@ -31,10 +31,17 @@ function buildBodies({ name, email, message, interests }: ContactMail) {
     <div style="font-family:system-ui,sans-serif;line-height:1.5;color:#111">
       <h2 style="margin:0 0 16px">New strategy call request</h2>
       <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-      <p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
+      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+      <p style="color:#555;font-size:13px;margin-top:-8px">
+        Hit Reply in your inbox to answer them (Reply-To is already set).
+      </p>
       <p><strong>Interested in:</strong> ${escapeHtml(interests.join(", ") || "—")}</p>
       <p><strong>Message:</strong></p>
       <p style="white-space:pre-wrap">${escapeHtml(message || "(No message provided)")}</p>
+      <hr style="border:none;border-top:1px solid #eee;margin:24px 0" />
+      <p style="color:#888;font-size:12px;margin:0">
+        Sent from ${escapeHtml(SITE.url.replace(/^https?:\/\//, ""))} contact form
+      </p>
     </div>
   `;
 
