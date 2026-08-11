@@ -69,11 +69,13 @@ export function ContactClient() {
 
       const payload = (await res.json().catch(() => ({}))) as {
         error?: string;
+        detail?: string;
       };
 
       if (!res.ok) {
         throw new Error(
-          payload.error ||
+          payload.detail ||
+            payload.error ||
             `Couldn't send. Email ${SITE.formEmail} directly.`
         );
       }

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { sendContactEmail } from "@/lib/email";
+import { emailConfigStatus, sendContactEmail } from "@/lib/email";
 import { SITE } from "@/lib/data";
 
 type ContactPayload = {
@@ -8,6 +8,18 @@ type ContactPayload = {
   message?: string;
   interests?: string[];
 };
+
+/** Quick check: open /api/contact in the browser after deploy. */
+export async function GET() {
+  const status = emailConfigStatus();
+  return NextResponse.json({
+    ok: status.resendConfigured || status.smtpConfigured,
+    ...status,
+    note: status.resendConfigured
+      ? "With onboarding@resend.dev, Resend only delivers to the email on your Resend account until you verify celeriscreative.com."
+      : "RESEND_API_KEY is missing on this deployment.",
+  });
+}
 
 export async function POST(request: Request) {
   let body: ContactPayload;
@@ -47,8 +59,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error: `Couldn't send your request right now. Email ${SITE.formEmail} directly.`,
-        detail:
-          process.env.NODE_ENV === "development" ? detail : undefined,
+        detail,
       },
       { status: 502 }
     );

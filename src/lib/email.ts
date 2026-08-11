@@ -9,6 +9,14 @@ export type ContactMail = {
   interests: string[];
 };
 
+function recipient() {
+  return (
+    process.env.CONTACT_TO_EMAIL?.trim() ||
+    process.env.FORM_TO_EMAIL?.trim() ||
+    SITE.formEmail
+  );
+}
+
 function buildBodies({ name, email, message, interests }: ContactMail) {
   const subject = `Strategy call request — ${name}`;
   const text = [
@@ -42,19 +50,20 @@ function escapeHtml(value: string) {
 }
 
 async function sendWithResend(mail: ContactMail) {
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) return null;
 
   const from =
-    process.env.EMAIL_FROM ||
-    process.env.RESEND_FROM ||
+    process.env.EMAIL_FROM?.trim() ||
+    process.env.RESEND_FROM?.trim() ||
     "Celeris Creative <onboarding@resend.dev>";
 
+  const to = recipient();
   const { subject, text, html } = buildBodies(mail);
   const resend = new Resend(apiKey);
-  const { error } = await resend.emails.send({
+  const { data, error } = await resend.emails.send({
     from,
-    to: [SITE.formEmail],
+    to: [to],
     replyTo: mail.email,
     subject,
     text,
@@ -62,22 +71,30 @@ async function sendWithResend(mail: ContactMail) {
   });
 
   if (error) {
-    throw new Error(error.message || "Resend rejected the message.");
+    // Most common: unverified domain / can only send to account email with onboarding@
+    throw new Error(
+      error.message ||
+        "Resend rejected the message. Verify your domain or check EMAIL_FROM."
+    );
+  }
+
+  if (!data?.id) {
+    throw new Error("Resend returned no message id.");
   }
 
   return "resend" as const;
 }
 
 async function sendWithSmtp(mail: ContactMail) {
-  const host = process.env.SMTP_HOST;
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
+  const host = process.env.SMTP_HOST?.trim();
+  const user = process.env.SMTP_USER?.trim();
+  const pass = process.env.SMTP_PASS?.trim();
   if (!host || !user || !pass) return null;
 
   const port = Number(process.env.SMTP_PORT || 587);
   const from =
-    process.env.EMAIL_FROM ||
-    process.env.SMTP_FROM ||
+    process.env.EMAIL_FROM?.trim() ||
+    process.env.SMTP_FROM?.trim() ||
     `"Celeris Creative" <${user}>`;
 
   const { subject, text, html } = buildBodies(mail);
@@ -90,7 +107,7 @@ async function sendWithSmtp(mail: ContactMail) {
 
   await transporter.sendMail({
     from,
-    to: SITE.formEmail,
+    to: recipient(),
     replyTo: mail.email,
     subject,
     text,
@@ -100,18 +117,41 @@ async function sendWithSmtp(mail: ContactMail) {
   return "smtp" as const;
 }
 
+export function emailConfigStatus() {
+  return {
+    resendConfigured: Boolean(process.env.RESEND_API_KEY?.trim()),
+    smtpConfigured: Boolean(
+      process.env.SMTP_HOST?.trim() &&
+        process.env.SMTP_USER?.trim() &&
+        process.env.SMTP_PASS?.trim()
+    ),
+    to: recipient(),
+    from:
+      process.env.EMAIL_FROM?.trim() ||
+      process.env.RESEND_FROM?.trim() ||
+      "Celeris Creative <onboarding@resend.dev>",
+  };
+}
+
 /**
- * Prefers Resend, then SMTP. Both deliver to SITE.formEmail (ganesh@).
- * Yes — putting SMTP host/user/pass in env is enough to send without Resend.
+ * Prefers Resend, then SMTP. Delivers to CONTACT_TO_EMAIL or ganesh@.
  */
 export async function sendContactEmail(mail: ContactMail) {
-  const viaResend = await sendWithResend(mail);
-  if (viaResend) return viaResend;
+  try {
+    const viaResend = await sendWithResend(mail);
+    if (viaResend) return viaResend;
+  } catch (err) {
+    // If Resend is configured but fails, don't silently fall through —
+    // surface that error (SMTP is opt-in fallback only when Resend is absent).
+    if (process.env.RESEND_API_KEY?.trim()) {
+      throw err;
+    }
+  }
 
   const viaSmtp = await sendWithSmtp(mail);
   if (viaSmtp) return viaSmtp;
 
   throw new Error(
-    "Email is not configured. Add RESEND_API_KEY or SMTP_HOST/SMTP_USER/SMTP_PASS to the environment."
+    "Email is not configured. Add RESEND_API_KEY (and EMAIL_FROM) in Vercel env, then redeploy."
   );
 }
