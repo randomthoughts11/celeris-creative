@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendContactEmail } from "@/lib/email";
 import { SITE } from "@/lib/data";
 
 type ContactPayload = {
@@ -35,57 +36,20 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Enter a valid email." }, { status: 400 });
   }
 
-  const subject = `Strategy call request — ${name}`;
-  const text = [
-    `Name: ${name}`,
-    `Email: ${email}`,
-    `Interested in: ${interests.join(", ") || "—"}`,
-    "",
-    message || "(No message provided)",
-  ].join("\n");
-
   try {
-    // FormSubmit AJAX — delivers to SITE.formEmail with no API key.
-    // First live submission emails ganesh@ a one-time confirmation link.
-    const res = await fetch(
-      `https://formsubmit.co/ajax/${encodeURIComponent(SITE.formEmail)}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          message: text,
-          _subject: subject,
-          _replyto: email,
-          _template: "table",
-        }),
-      }
-    );
+    const provider = await sendContactEmail({ name, email, message, interests });
+    return NextResponse.json({ ok: true, provider });
+  } catch (err) {
+    const detail =
+      err instanceof Error ? err.message : "Unknown email error.";
+    console.error("[contact]", detail);
 
-    const data = (await res.json().catch(() => ({}))) as {
-      success?: boolean | string;
-      message?: string;
-    };
-
-    if (!res.ok) {
-      return NextResponse.json(
-        {
-          error:
-            data.message ||
-            "Couldn't send your request. Email us directly instead.",
-        },
-        { status: 502 }
-      );
-    }
-
-    return NextResponse.json({ ok: true });
-  } catch {
     return NextResponse.json(
-      { error: "Couldn't send your request. Email us directly instead." },
+      {
+        error: `Couldn't send your request right now. Email ${SITE.formEmail} directly.`,
+        detail:
+          process.env.NODE_ENV === "development" ? detail : undefined,
+      },
       { status: 502 }
     );
   }
