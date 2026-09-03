@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { PageHero } from "@/components/layout/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
@@ -234,6 +235,17 @@ export function ContactClient() {
                         </span>
                       )}
                     </button>
+                    <p className="mt-4 text-xs leading-relaxed text-mist">
+                      By submitting, you agree to our{" "}
+                      <Link href="/privacy" className="text-fog underline-offset-2 hover:text-snow hover:underline">
+                        Privacy Policy
+                      </Link>{" "}
+                      and{" "}
+                      <Link href="/terms" className="text-fog underline-offset-2 hover:text-snow hover:underline">
+                        Terms of Service
+                      </Link>
+                      .
+                    </p>
                   </motion.div>
                 )}
               </AnimatePresence>

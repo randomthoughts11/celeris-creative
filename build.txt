@@ -1,0 +1,3 @@
+build=2026-09-03
+release=legal-pages
+summary=Add Privacy Policy, Terms of Service, and Cookie Policy pages (footer links only); contact form legal consent note; sitemap entries for /privacy /terms /cookies
