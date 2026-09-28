@@ -8,9 +8,9 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Celeris Creative — AI Marketing Agency in Plano, TX",
+  title: "About Celeris Creative | AI Marketing Agency in Plano, TX",
   description:
-    "Celeris Creative is an AI-powered growth agency in Plano, TX. Designers, strategists, and automation engineers building growth systems for ambitious brands.",
+    "Meet Celeris Creative, an AI-powered growth agency in Plano, TX. Designers, strategists, and automation engineers building growth systems for brands.",
   path: "/about",
 });
 

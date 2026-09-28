@@ -13,6 +13,7 @@ import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { SITE } from "@/lib/data";
 import {
+  HOME_TITLE,
   organizationSchema,
   SEO_KEYWORDS,
   websiteSchema,
@@ -47,9 +48,10 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Celeris Creative — AI-Powered Growth Agency",
-    template: "%s — Celeris Creative",
+    default: HOME_TITLE,
+    template: "%s | Celeris Creative",
   },
+  applicationName: SITE.name,
   description: SITE.description,
   keywords: [...SEO_KEYWORDS],
   alternates: { canonical: SITE.url },
@@ -58,13 +60,13 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE.url,
     siteName: SITE.name,
-    title: "Celeris Creative — AI-Powered Growth Agency",
+    title: HOME_TITLE,
     description: SITE.description,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Celeris Creative — AI-Powered Growth Agency",
+    title: HOME_TITLE,
     description: SITE.description,
   },
   verification: { google: "mlXPRl1OTLePX6b1bXWf00qb-Xj_L5Zs8jn8tpaSBSU" },

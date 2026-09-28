@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {};
 
   return pageMetadata({
-    title: `${post.title} | Celeris Creative`,
+    title: post.seoTitle,
     description: post.description,
     path: `/blog/${post.slug}`,
     keywords: [post.keyword, "Celeris Creative", "AI growth agency"],

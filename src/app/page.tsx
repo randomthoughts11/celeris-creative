@@ -11,11 +11,11 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema, pageMetadata, SEO_KEYWORDS } from "@/lib/seo";
+import { faqSchema, HOME_TITLE, pageMetadata, SEO_KEYWORDS } from "@/lib/seo";
 import { SITE } from "@/lib/data";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Celeris Creative — AI-Powered Growth Agency",
+  title: HOME_TITLE,
   description: SITE.description,
   path: "/",
   keywords: [...SEO_KEYWORDS],

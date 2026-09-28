@@ -8,7 +8,7 @@ export const SITE = {
   address: "700 E Park Blvd #208, Plano, TX 75074, United States",
   tagline: "The growth system behind ambitious brands.",
   description:
-    "Celeris Creative is an AI-powered growth agency. We design brands, build websites, and engineer automated marketing systems that turn attention into revenue.",
+    "AI marketing agency in Plano, TX. Celeris Creative builds brands, websites, and automated marketing systems that turn attention into revenue.",
 };
 
 export const NAV_LINKS = [

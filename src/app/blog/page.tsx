@@ -10,7 +10,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
  * from main UX while remaining indexable.
  */
 export const metadata: Metadata = pageMetadata({
-  title: "Insights on AI Marketing & Growth Systems | Celeris Creative",
+  title: "AI Marketing & Growth Blog | Celeris Creative",
   description:
     "Articles on AI marketing, automation, branding, web design, and wellness growth systems from Celeris Creative.",
   path: "/blog",

@@ -1,6 +1,8 @@
 export type BlogPost = {
   slug: string;
   title: string;
+  /** Search-result title, kept ≤ 60 chars including the brand suffix. */
+  seoTitle: string;
   description: string;
   keyword: string;
   date: string;
@@ -17,6 +19,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "ai-marketing-agency",
     title: "What an AI Marketing Agency Actually Builds for Growing Brands",
+    seoTitle: "What Does an AI Marketing Agency Do? | Celeris Creative",
     description:
       "An AI marketing agency doesn't just run ads — it builds automated growth systems. Here's what that looks like for ambitious businesses.",
     keyword: "AI marketing agency",
@@ -48,6 +51,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "digital-marketing-agency-plano-tx",
     title: "Digital Marketing Agency in Plano, TX for Brands Ready to Scale",
+    seoTitle: "Digital Marketing Agency in Plano, TX | Celeris Creative",
     description:
       "Looking for a digital marketing agency in Plano, TX? Celeris Creative builds AI-powered growth systems for wellness, healthcare, and ambitious local brands.",
     keyword: "digital marketing agency Plano TX",
@@ -79,6 +83,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "ai-automation-agency",
     title: "AI Automation Agency: Systems That Sell While You Sleep",
+    seoTitle: "AI Automation Agency: Systems That Sell | Celeris Creative",
     description:
       "An AI automation agency designs the workflows, CRMs, and sales systems that remove manual work between a lead and a closed deal.",
     keyword: "AI automation agency",
@@ -110,6 +115,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "branding-agency",
     title: "Branding Agency Work That Converts — Not Just Looks Expensive",
+    seoTitle: "Branding Agency Work That Converts | Celeris Creative",
     description:
       "A branding agency should make you unmistakable and financially sharper. Here's how strategy-first identity systems drive growth.",
     keyword: "branding agency",
@@ -140,6 +146,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "web-design-agency",
     title: "Web Design Agency Sites Engineered to Book Calls, Not Win Awards Alone",
+    seoTitle: "Web Design Agency Sites That Book Calls | Celeris Creative",
     description:
       "A modern web design agency builds fast, cinematic sites that convert. Learn how Celeris engineers websites as growth infrastructure.",
     keyword: "web design agency",
@@ -170,6 +177,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "growth-systems",
     title: "Growth Systems Beats Random Marketing — How Connected Funnels Win",
+    seoTitle: "Growth Systems vs. Random Marketing | Celeris Creative",
     description:
       "Growth systems connect brand, website, campaigns, and AI automation into one machine. Here's why they outperform isolated agency retainers.",
     keyword: "growth systems",
@@ -200,6 +208,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "wellness-marketing",
     title: "Wellness Marketing That Builds Trust — Not Just Traffic",
+    seoTitle: "Wellness Marketing That Builds Trust | Celeris Creative",
     description:
       "Wellness marketing for Ayurveda, clinics, and health brands needs trust-first creative, compliant messaging, and AI follow-up systems.",
     keyword: "wellness marketing",

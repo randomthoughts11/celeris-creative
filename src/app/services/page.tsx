@@ -9,7 +9,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "AI Marketing & Web Design Services | Celeris Creative",
+  title: "AI Marketing, Branding & Web Design | Celeris Creative",
   description:
     "AI automation, branding, web design, performance marketing, content systems, and lead generation — engineered as one growth system by Celeris Creative.",
   path: "/services",

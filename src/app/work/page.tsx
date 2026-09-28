@@ -10,7 +10,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Case Studies & Growth Results | Celeris Creative Work",
+  title: "Case Studies & Client Results | Celeris Creative",
   description:
     "Case studies from Celeris Creative — growth systems, rebrands, and AI automation shipped for wellness, healthcare, media, and e-commerce brands.",
   path: "/work",

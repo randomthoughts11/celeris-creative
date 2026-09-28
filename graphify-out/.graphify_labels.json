@@ -1,0 +1,23 @@
+{
+  "0": "data.ts",
+  "1": "seo.ts",
+  "2": "devDependencies",
+  "3": "compilerOptions",
+  "4": "dependencies",
+  "5": "layout.tsx",
+  "6": "SITE",
+  "7": "[slug]/page.tsx",
+  "8": "Celeris Creative — Sitemap, User Journey & Wireframes",
+  "9": "Celeris Creative — Legacy Content Archive",
+  "10": "Celeris Creative — Design System & Style Guide",
+  "11": "Celeris Creative — Website",
+  "12": "opengraph-image.tsx",
+  "13": "next.config.ts",
+  "14": "postcss.config.mjs",
+  "15": "screenshot.mjs",
+  "16": "sections.mjs",
+  "17": "not-found.tsx",
+  "18": "template.tsx",
+  "19": "pages.mjs",
+  "20": "verify-cta.mjs"
+}

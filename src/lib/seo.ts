@@ -11,6 +11,8 @@ export const SEO_KEYWORDS = [
   "wellness marketing",
 ] as const;
 
+export const HOME_TITLE = "AI Marketing Agency in Plano, TX | Celeris Creative";
+
 /** Build page metadata with canonical, robots, and social tags. */
 export function pageMetadata({
   title,
@@ -58,7 +60,7 @@ export function organizationSchema() {
     email: SITE.email,
     description: SITE.description,
     image: `${SITE.url}/opengraph-image`,
-    logo: `${SITE.url}/opengraph-image`,
+    logo: `${SITE.url}/logo.png`,
     address: {
       "@type": "PostalAddress",
       streetAddress: "700 E Park Blvd #208",
@@ -107,6 +109,7 @@ export function websiteSchema() {
     "@type": "WebSite",
     "@id": `${SITE.url}/#website`,
     name: SITE.name,
+    alternateName: ["Celeris", "celeriscreative.com"],
     url: SITE.url,
     description: SITE.description,
     publisher: { "@id": `${SITE.url}/#organization` },
@@ -166,7 +169,7 @@ export function articleSchema(post: {
       url: SITE.url,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE.url}/opengraph-image`,
+        url: `${SITE.url}/logo.png`,
       },
     },
     mainEntityOfPage: `${SITE.url}/blog/${post.slug}`,
