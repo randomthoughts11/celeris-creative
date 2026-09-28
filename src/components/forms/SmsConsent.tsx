@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SMS_CONSENT_BODY } from "@/lib/legal";
+import { SMS_CONSENT_LEAD, SMS_CONSENT_TAIL } from "@/lib/legal";
 
 export function SmsConsent({
   checked,
@@ -22,7 +22,7 @@ export function SmsConsent({
           className="mt-1 h-4 w-4 shrink-0 accent-iris"
         />
         <span>
-          {SMS_CONSENT_BODY} View our{" "}
+          {SMS_CONSENT_LEAD}{" "}
           <Link href="/privacy" className="text-snow underline underline-offset-2">
             Privacy Policy
           </Link>{" "}
@@ -30,7 +30,7 @@ export function SmsConsent({
           <Link href="/terms-and-conditions" className="text-snow underline underline-offset-2">
             SMS Terms &amp; Conditions
           </Link>
-          .
+          . {SMS_CONSENT_TAIL}
         </span>
       </label>
     </fieldset>

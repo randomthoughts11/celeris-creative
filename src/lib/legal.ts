@@ -18,9 +18,12 @@ export type LegalDoc = {
 const UPDATED = "September 28, 2026";
 
 /** Exact SMS opt-in wording. Shown beside the contact-form checkbox and on /sms-disclosure. */
-export const SMS_CONSENT_BODY = `By checking this box, I agree to receive text messages from ${SITE.legalName} about my inquiry, appointment scheduling, and service updates at the mobile number provided. Message frequency varies. Message and data rates may apply. Reply STOP to opt out at any time. Reply HELP for help. Consent is not a condition of purchase.`;
+export const SMS_CONSENT_LEAD = `By checking this box, providing a telephone number, and submitting the form, you are consenting to be contacted by ${SITE.legalName} via SMS text message with appointment reminders and service updates at the number provided, including messages sent by autodialer, and agreeing to our`;
 
-export const SMS_CONSENT_TEXT = `${SMS_CONSENT_BODY} View our Privacy Policy and SMS Terms & Conditions.`;
+export const SMS_CONSENT_TAIL =
+  "Message frequency may vary. Message and data rates may apply. Reply STOP to opt out of further messaging. Reply HELP for more information. Consent is not a condition of purchase.";
+
+export const SMS_CONSENT_TEXT = `${SMS_CONSENT_LEAD} Privacy Policy and SMS Terms & Conditions. ${SMS_CONSENT_TAIL}`;
 
 export const LEGAL_LINKS = [
   { label: "Privacy Policy", href: "/privacy" },
@@ -335,7 +338,7 @@ export const LEGAL_DOCS: LegalDoc[] = [
       {
         heading: "2. How to opt in",
         paragraphs: [
-          "You opt in by entering your mobile number on the SMS opt-in form at celeriscreative.com/sms-disclosure or the contact form at celeriscreative.com/contact and checking the SMS consent box, which is unchecked by default. The checkbox is optional — you can submit the form without agreeing to texts.",
+          "You opt in by entering your mobile number on the SMS opt-in form at celeriscreative.com/sms-disclosure or the contact form at celeriscreative.com/contact and checking the SMS consent box, which is unchecked by default. The checkbox is optional — you can submit the form without agreeing to texts. You may also give verbal consent when our team asks during a phone call.",
         ],
       },
       {
@@ -400,7 +403,8 @@ export const LEGAL_DOCS: LegalDoc[] = [
       {
         heading: "1. Where consent is collected",
         paragraphs: [
-          "Consent is collected through web forms only, in two places: the SMS opt-in form at the top of this page (celeriscreative.com/sms-disclosure), and the contact form at celeriscreative.com/contact, which customers reach from the Contact link and the Book Strategy Call button on every page of our website. Both forms include a mobile number field and a separate SMS consent checkbox that is unchecked by default. Checking the box is optional and is not required to submit the form or to receive our services. We do not purchase phone lists or opt users in on their behalf.",
+          "Verbal consent: during a phone call with our team, customers who provide their phone number are asked whether they would like appointment reminders and service updates by text. They are told that message and data rates may apply, message frequency may vary, and they can reply HELP for support or STOP to unsubscribe at any time. Phone numbers are never shared for marketing or promotional purposes.",
+          "Website consent is collected in two places: the SMS opt-in form at the top of this page (celeriscreative.com/sms-disclosure), and the contact form at celeriscreative.com/contact, which customers reach from the Contact link and the Book Strategy Call button on every page of our website. Both forms include a mobile number field and a separate SMS consent checkbox that is unchecked by default. Checking the box is optional and is not required to submit the form or to receive our services. We do not purchase phone lists or opt users in on their behalf.",
         ],
       },
       {
