@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { PageHero } from "@/components/layout/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { SITE } from "@/lib/data";
-import { SMS_CONSENT_BODY } from "@/lib/legal";
+import { SmsConsent } from "@/components/forms/SmsConsent";
 
 const SERVICES_OPTIONS = [
   "AI & Automation",
@@ -234,29 +234,7 @@ export function ContactClient() {
                       />
                     </div>
 
-                    <label className="mt-6 flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-fog">
-                      <input
-                        type="checkbox"
-                        name="smsConsent"
-                        checked={smsConsent}
-                        onChange={(e) => setSmsConsent(e.target.checked)}
-                        className="mt-0.5 h-4 w-4 shrink-0 accent-iris"
-                      />
-                      <span>
-                        {SMS_CONSENT_BODY} View our{" "}
-                        <Link href="/privacy" className="text-snow underline underline-offset-2">
-                          Privacy Policy
-                        </Link>{" "}
-                        and{" "}
-                        <Link
-                          href="/terms-and-conditions"
-                          className="text-snow underline underline-offset-2"
-                        >
-                          SMS Terms &amp; Conditions
-                        </Link>
-                        .
-                      </span>
-                    </label>
+                    <SmsConsent checked={smsConsent} onChange={setSmsConsent} />
 
                     {error && (
                       <p className="mt-6 text-sm text-red-300" role="alert">

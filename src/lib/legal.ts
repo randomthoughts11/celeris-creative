@@ -335,7 +335,7 @@ export const LEGAL_DOCS: LegalDoc[] = [
       {
         heading: "2. How to opt in",
         paragraphs: [
-          "You opt in by entering your mobile number on our contact form at celeriscreative.com/contact and checking the SMS consent box, which is unchecked by default. The checkbox is optional — you can submit the form without agreeing to texts.",
+          "You opt in by entering your mobile number on the SMS opt-in form at celeriscreative.com/sms-disclosure or the contact form at celeriscreative.com/contact and checking the SMS consent box, which is unchecked by default. The checkbox is optional — you can submit the form without agreeing to texts.",
         ],
       },
       {
@@ -395,12 +395,12 @@ export const LEGAL_DOCS: LegalDoc[] = [
     description:
       "How Celeris Creative Agency LLP collects SMS consent, the exact opt-in language shown to users, and how to opt out or get help.",
     updated: UPDATED,
-    intro: `This page documents how ${SITE.legalName} collects consent to send text messages, including the exact disclosure shown at the point of opt-in.`,
+    intro: `Use the form below to opt in to text messages from ${SITE.legalName}. This page also documents how we collect SMS consent, including the exact disclosure shown at the point of opt-in.`,
     sections: [
       {
         heading: "1. Where consent is collected",
         paragraphs: [
-          "Consent is collected on our contact form at celeriscreative.com/contact. The form includes an optional mobile number field and a separate SMS consent checkbox that is unchecked by default. Checking the box is not required to submit the form or to receive our services.",
+          "Consent is collected through web forms only, in two places: the SMS opt-in form at the top of this page (celeriscreative.com/sms-disclosure), and the contact form at celeriscreative.com/contact, which customers reach from the Contact link and the Book Strategy Call button on every page of our website. Both forms include a mobile number field and a separate SMS consent checkbox that is unchecked by default. Checking the box is optional and is not required to submit the form or to receive our services. We do not purchase phone lists or opt users in on their behalf.",
         ],
       },
       {

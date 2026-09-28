@@ -1,3 +1,3 @@
-build=2026-09-28.2
-release=favicon-seo-titles
-summary=Add favicon (favicon.ico 16/32/48, icon.svg, apple-icon.png) and square logo.png for Google; home title "AI Marketing Agency in Plano, TX | Celeris Creative"; all page titles <=60 chars and descriptions <=155 chars; short seoTitle per blog post; JSON-LD logo now square, WebSite alternateName added
+build=2026-09-28.3
+release=sms-optin-page
+summary=10DLC 2132 fix: dedicated SMS opt-in form on /sms-disclosure (form + full disclosures on one URL); shared SmsConsent component with visible "Text message updates (optional)" box on /contact; disclosure/T&C text lists both opt-in locations

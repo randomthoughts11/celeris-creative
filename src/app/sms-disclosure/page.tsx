@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { SmsOptInForm } from "@/components/forms/SmsOptInForm";
 import { LegalDocument } from "@/components/layout/LegalDocument";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getLegalDoc } from "@/lib/legal";
@@ -26,7 +27,9 @@ export default function SmsDisclosurePage() {
           { name: "SMS Disclosure", path: "/sms-disclosure" },
         ])}
       />
-      <LegalDocument doc={doc} />
+      <LegalDocument doc={doc}>
+        <SmsOptInForm />
+      </LegalDocument>
     </>
   );
 }

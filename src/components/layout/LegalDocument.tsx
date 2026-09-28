@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { LegalDoc } from "@/lib/legal";
 import { LEGAL_LINKS } from "@/lib/legal";
 
-export function LegalDocument({ doc }: { doc: LegalDoc }) {
+export function LegalDocument({ doc, children }: { doc: LegalDoc; children?: React.ReactNode }) {
   return (
     <article className="relative overflow-hidden pb-28 pt-36 sm:pt-44">
       <div
@@ -20,6 +20,8 @@ export function LegalDocument({ doc }: { doc: LegalDoc }) {
         <p className="mt-6 text-base leading-relaxed text-fog sm:text-lg">
           {doc.intro}
         </p>
+
+        {children}
 
         <div className="hairline mt-12" aria-hidden />
 
