@@ -1,3 +1,3 @@
-build=2026-09-03
-release=legal-pages
-summary=Add Privacy Policy, Terms of Service, and Cookie Policy pages (footer links only); contact form legal consent note; sitemap entries for /privacy /terms /cookies
+build=2026-09-28
+release=sms-10dlc-compliance
+summary=Zoom 10DLC CTA fix: optional mobile number + unchecked SMS consent checkbox on contact form (brand, message types, frequency varies, msg & data rates, STOP/HELP, links); consent record (timestamp, IP, exact text) in notification email; new /terms-and-conditions (SMS program terms) and /sms-disclosure pages; Privacy Policy SMS clause (no sharing of mobile opt-in data); footer legal links updated; sitemap entries

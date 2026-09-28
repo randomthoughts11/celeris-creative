@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
 import { emailConfigStatus, sendContactEmail } from "@/lib/email";
 import { SITE } from "@/lib/data";
+import { SMS_CONSENT_TEXT } from "@/lib/legal";
 
 type ContactPayload = {
   name?: string;
   email?: string;
   message?: string;
   interests?: string[];
+  phone?: string;
+  smsConsent?: boolean;
 };
 
 /** Quick check: open /api/contact in the browser after deploy. */
@@ -50,8 +53,32 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Enter a valid email." }, { status: 400 });
   }
 
+  const phone = String(body.phone ?? "").trim();
+  if (phone && !/^\+?[\d\s().-]{7,20}$/.test(phone)) {
+    return NextResponse.json({ error: "Enter a valid phone number." }, { status: 400 });
+  }
+  if (body.smsConsent === true && !phone) {
+    return NextResponse.json(
+      { error: "Add a mobile number to receive text messages." },
+      { status: 400 }
+    );
+  }
+
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  const smsConsent =
+    body.smsConsent === true
+      ? `Yes — ${new Date().toISOString()} from IP ${ip}. Agreed to: "${SMS_CONSENT_TEXT}"`
+      : "No";
+
   try {
-    const provider = await sendContactEmail({ name, email, message, interests });
+    const provider = await sendContactEmail({
+      name,
+      email,
+      message,
+      interests,
+      phone,
+      smsConsent,
+    });
     return NextResponse.json({ ok: true, provider });
   } catch (err) {
     const detail =

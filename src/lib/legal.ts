@@ -7,7 +7,7 @@ export type LegalSection = {
 };
 
 export type LegalDoc = {
-  slug: "privacy" | "terms" | "cookies";
+  slug: "privacy" | "terms" | "terms-and-conditions" | "sms-disclosure" | "cookies";
   title: string;
   description: string;
   updated: string;
@@ -15,11 +15,18 @@ export type LegalDoc = {
   sections: LegalSection[];
 };
 
-const UPDATED = "September 3, 2026";
+const UPDATED = "September 28, 2026";
+
+/** Exact SMS opt-in wording. Shown beside the contact-form checkbox and on /sms-disclosure. */
+export const SMS_CONSENT_BODY = `By checking this box, I agree to receive text messages from ${SITE.legalName} about my inquiry, appointment scheduling, and service updates at the mobile number provided. Message frequency varies. Message and data rates may apply. Reply STOP to opt out at any time. Reply HELP for help. Consent is not a condition of purchase.`;
+
+export const SMS_CONSENT_TEXT = `${SMS_CONSENT_BODY} View our Privacy Policy and SMS Terms & Conditions.`;
 
 export const LEGAL_LINKS = [
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms of Service", href: "/terms" },
+  { label: "Terms & Conditions", href: "/terms-and-conditions" },
+  { label: "SMS Disclosure", href: "/sms-disclosure" },
   { label: "Cookie Policy", href: "/cookies" },
 ] as const;
 
@@ -78,6 +85,15 @@ export const LEGAL_DOCS: LegalDoc[] = [
           "Professional advisors (legal, accounting) when reasonably necessary.",
           "Authorities or other parties when required by law, legal process, or to protect rights, safety, or security.",
           "A successor entity in connection with a merger, acquisition, or sale of assets, subject to appropriate protections.",
+        ],
+      },
+      {
+        heading: "5a. Mobile information and text messaging (SMS)",
+        paragraphs: [
+          "If you opt in to receive text messages, we collect your mobile number and a record of your consent (date, time, and the consent language you agreed to). We use this information only to send the messages you requested and to honor opt-out requests.",
+          "No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All categories of information sharing described in this policy exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.",
+          "Our SMS messaging provider (Zoom) processes mobile numbers solely to deliver messages on our behalf.",
+          "You can opt out at any time by replying STOP. Reply HELP for help. Message frequency varies. Message and data rates may apply. See our SMS Terms & Conditions at /terms-and-conditions for full program details.",
         ],
       },
       {
@@ -193,6 +209,12 @@ export const LEGAL_DOCS: LegalDoc[] = [
         ],
       },
       {
+        heading: "8a. Text messaging",
+        paragraphs: [
+          "If you opt in to text messages, our SMS program is governed by our SMS Terms & Conditions (/terms-and-conditions) and SMS Disclosure (/sms-disclosure). Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. Consent to receive texts is never a condition of purchase.",
+        ],
+      },
+      {
         heading: "9. Disclaimers",
         paragraphs: [
           'THE SITE AND ITS CONTENT ARE PROVIDED “AS IS” AND “AS AVAILABLE.” TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE SITE WILL BE UNINTERRUPTED, ERROR-FREE, OR SECURE, OR THAT MARKETING OR BUSINESS OUTCOMES WILL MEET YOUR EXPECTATIONS.',
@@ -292,6 +314,136 @@ export const LEGAL_DOCS: LegalDoc[] = [
         heading: "8. Contact",
         paragraphs: [
           `Questions about cookies: ${SITE.formEmail} · ${SITE.legalName} · ${SITE.address}.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "terms-and-conditions",
+    title: "SMS Terms & Conditions",
+    description:
+      "Terms and conditions for the Celeris Creative Agency LLP text messaging (SMS) program: opt-in, message frequency, rates, STOP and HELP.",
+    updated: UPDATED,
+    intro: `These Terms & Conditions govern the text messaging (SMS) program operated by ${SITE.legalName} ("Celeris"). By opting in, you agree to these terms.`,
+    sections: [
+      {
+        heading: "1. Program description",
+        paragraphs: [
+          `Program name: ${SITE.name} Client Messages. When you opt in, ${SITE.legalName} sends text messages about your inquiry, appointment scheduling and reminders, and updates about services you requested. Messages are sent through our business phone provider, Zoom.`,
+        ],
+      },
+      {
+        heading: "2. How to opt in",
+        paragraphs: [
+          "You opt in by entering your mobile number on our contact form at celeriscreative.com/contact and checking the SMS consent box, which is unchecked by default. The checkbox is optional — you can submit the form without agreeing to texts.",
+        ],
+      },
+      {
+        heading: "3. Message frequency",
+        paragraphs: [
+          "Message frequency varies based on your inquiry and scheduled appointments.",
+        ],
+      },
+      {
+        heading: "4. Costs",
+        paragraphs: [
+          "Message and data rates may apply. Check with your mobile carrier for details about your plan. Celeris does not charge for text messages.",
+        ],
+      },
+      {
+        heading: "5. How to opt out",
+        paragraphs: [
+          "You can cancel at any time. Reply STOP to any message to opt out. You will receive one final message confirming you have been unsubscribed, and no further messages will be sent. Reply START to opt back in.",
+          "Alternate opt-out keywords such as END, CANCEL, UNSUBSCRIBE, and QUIT are also honored.",
+        ],
+      },
+      {
+        heading: "6. How to get help",
+        paragraphs: [
+          `Reply HELP to any message for help, or email ${SITE.formEmail}.`,
+        ],
+      },
+      {
+        heading: "7. Carriers",
+        paragraphs: [
+          "Mobile carriers are not liable for delayed or undelivered messages. Supported carriers include major U.S. carriers; availability may vary.",
+        ],
+      },
+      {
+        heading: "8. Eligibility",
+        paragraphs: [
+          "You must be 18 or older and the account holder of the mobile number provided, or have the account holder's permission, to opt in.",
+        ],
+      },
+      {
+        heading: "9. Privacy",
+        paragraphs: [
+          "No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. Text messaging originator opt-in data and consent will not be shared with any third parties. See our Privacy Policy at /privacy.",
+        ],
+      },
+      {
+        heading: "10. Changes and contact",
+        paragraphs: [
+          `We may update these terms; the "Last updated" date will change when we do. Questions: ${SITE.formEmail} · ${SITE.legalName} · ${SITE.address}.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "sms-disclosure",
+    title: "SMS Disclosure",
+    description:
+      "How Celeris Creative Agency LLP collects SMS consent, the exact opt-in language shown to users, and how to opt out or get help.",
+    updated: UPDATED,
+    intro: `This page documents how ${SITE.legalName} collects consent to send text messages, including the exact disclosure shown at the point of opt-in.`,
+    sections: [
+      {
+        heading: "1. Where consent is collected",
+        paragraphs: [
+          "Consent is collected on our contact form at celeriscreative.com/contact. The form includes an optional mobile number field and a separate SMS consent checkbox that is unchecked by default. Checking the box is not required to submit the form or to receive our services.",
+        ],
+      },
+      {
+        heading: "2. Exact opt-in language",
+        paragraphs: [
+          "The following text appears directly next to the SMS consent checkbox:",
+          `"${SMS_CONSENT_TEXT}"`,
+          "The words Privacy Policy and SMS Terms & Conditions link to /privacy and /terms-and-conditions.",
+        ],
+      },
+      {
+        heading: "3. Disclosure summary",
+        paragraphs: [],
+        bullets: [
+          `Brand: ${SITE.legalName}`,
+          "Message types: inquiry follow-up, appointment scheduling and reminders, service updates",
+          "Message frequency: varies",
+          "Message and data rates may apply",
+          "Opt out: reply STOP at any time",
+          "Help: reply HELP, or email " + SITE.formEmail,
+          "Consent is not a condition of purchase",
+        ],
+      },
+      {
+        heading: "4. Sample messages",
+        paragraphs: [],
+        bullets: [
+          `Opt-in confirmation: "${SITE.name}: Thanks for opting in to texts about your inquiry. Msg frequency varies. Msg & data rates may apply. Reply HELP for help, STOP to opt out."`,
+          `Scheduling: "${SITE.name}: Hi Jane, your strategy call is confirmed for Tue at 2:00 PM CT. Reply STOP to opt out."`,
+          `HELP response: "${SITE.name}: For help, email ${SITE.formEmail}. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out."`,
+          `STOP response: "${SITE.name}: You are unsubscribed and will receive no further messages. Reply START to resubscribe."`,
+        ],
+      },
+      {
+        heading: "5. Record keeping",
+        paragraphs: [
+          "When a user opts in, we record the mobile number, the date and time of consent, the IP address of the submission, and the version of the consent language shown. Opt-out requests are processed immediately.",
+        ],
+      },
+      {
+        heading: "6. Privacy",
+        paragraphs: [
+          "No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. Text messaging originator opt-in data and consent will not be shared with any third parties.",
         ],
       },
     ],

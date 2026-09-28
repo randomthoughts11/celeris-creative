@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { PageHero } from "@/components/layout/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { SITE } from "@/lib/data";
+import { SMS_CONSENT_BODY } from "@/lib/legal";
 
 const SERVICES_OPTIONS = [
   "AI & Automation",
@@ -40,6 +41,7 @@ export function ContactClient() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [smsConsent, setSmsConsent] = useState(false);
 
   const toggle = (s: string) =>
     setSelected((prev) =>
@@ -55,6 +57,7 @@ export function ContactClient() {
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
+    const phone = String(data.get("phone") ?? "").trim();
 
     try {
       const res = await fetch("/api/contact", {
@@ -65,6 +68,8 @@ export function ContactClient() {
           email,
           message,
           interests: selected,
+          phone,
+          smsConsent,
         }),
       });
 
@@ -210,6 +215,48 @@ export function ContactClient() {
                         className="w-full resize-none border-b border-line bg-transparent pb-3 text-lg text-snow placeholder:text-mist focus:border-iris focus:outline-none"
                       />
                     </div>
+
+                    <div className="mt-10">
+                      <label
+                        htmlFor="phone"
+                        className="font-mono-label mb-3 block text-xs text-fog"
+                      >
+                        Mobile number {smsConsent ? "" : "(optional)"}
+                      </label>
+                      <input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        required={smsConsent}
+                        autoComplete="tel"
+                        placeholder="+1 (555) 123-4567"
+                        className="w-full border-b border-line bg-transparent pb-3 text-lg text-snow placeholder:text-mist focus:border-iris focus:outline-none"
+                      />
+                    </div>
+
+                    <label className="mt-6 flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-fog">
+                      <input
+                        type="checkbox"
+                        name="smsConsent"
+                        checked={smsConsent}
+                        onChange={(e) => setSmsConsent(e.target.checked)}
+                        className="mt-0.5 h-4 w-4 shrink-0 accent-iris"
+                      />
+                      <span>
+                        {SMS_CONSENT_BODY} View our{" "}
+                        <Link href="/privacy" className="text-snow underline underline-offset-2">
+                          Privacy Policy
+                        </Link>{" "}
+                        and{" "}
+                        <Link
+                          href="/terms-and-conditions"
+                          className="text-snow underline underline-offset-2"
+                        >
+                          SMS Terms &amp; Conditions
+                        </Link>
+                        .
+                      </span>
+                    </label>
 
                     {error && (
                       <p className="mt-6 text-sm text-red-300" role="alert">

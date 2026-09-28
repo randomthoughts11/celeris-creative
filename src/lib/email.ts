@@ -7,6 +7,9 @@ export type ContactMail = {
   email: string;
   message: string;
   interests: string[];
+  phone: string;
+  /** Human-readable SMS consent record, e.g. "Yes — 2026-09-28T… from 1.2.3.4". */
+  smsConsent: string;
 };
 
 function recipient() {
@@ -17,11 +20,13 @@ function recipient() {
   );
 }
 
-function buildBodies({ name, email, message, interests }: ContactMail) {
+function buildBodies({ name, email, message, interests, phone, smsConsent }: ContactMail) {
   const subject = `Strategy call request — ${name}`;
   const text = [
     `Name: ${name}`,
     `Email: ${email}`,
+    `Phone: ${phone || "—"}`,
+    `SMS consent: ${smsConsent}`,
     `Interested in: ${interests.join(", ") || "—"}`,
     "",
     message || "(No message provided)",
@@ -35,6 +40,8 @@ function buildBodies({ name, email, message, interests }: ContactMail) {
       <p style="color:#555;font-size:13px;margin-top:-8px">
         Hit Reply in your inbox to answer them (Reply-To is already set).
       </p>
+      <p><strong>Phone:</strong> ${escapeHtml(phone || "—")}</p>
+      <p><strong>SMS consent:</strong> ${escapeHtml(smsConsent)}</p>
       <p><strong>Interested in:</strong> ${escapeHtml(interests.join(", ") || "—")}</p>
       <p><strong>Message:</strong></p>
       <p style="white-space:pre-wrap">${escapeHtml(message || "(No message provided)")}</p>
