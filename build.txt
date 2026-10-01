@@ -1,3 +1,3 @@
-build=2026-09-28.4
-release=sms-zoom-template
-summary=SMS consent checkbox text now matches Zoom support's webform disclosure template (consent to be contacted via SMS, autodialer, Privacy Policy link, frequency, rates, STOP, HELP; checkbox optional); SMS Disclosure and SMS T&C document verbal consent
+build=2026-10-01
+release=real-clients
+summary=Replace placeholder case studies and client marquee with real clients: Vande Wellness, VandeCart, Vande University, Total Health Centers, AyurDoc, THC CDSS (live site links, factual figures from client sites)

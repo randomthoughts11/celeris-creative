@@ -12,7 +12,7 @@ import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Case Studies & Client Results | Celeris Creative",
   description:
-    "Case studies from Celeris Creative — growth systems, rebrands, and AI automation shipped for wellness, healthcare, media, and e-commerce brands.",
+    "Celeris Creative case studies: Vande Wellness, VandeCart, Vande University, Total Health Centers, AyurDoc, and clinical AI for integrative care.",
   path: "/work",
 });
 
@@ -29,7 +29,7 @@ export default function WorkPage() {
         eyebrow="Selected work"
         title="Proof over"
         accent="promises."
-        description="Every engagement below started with a constraint and ended with a system. The numbers are the story."
+        description="Every project below is live in production for a real client. Click through and see the work for yourself."
       />
 
       <section aria-label="Results at a glance" className="mx-auto max-w-[1400px] px-6 lg:px-10">

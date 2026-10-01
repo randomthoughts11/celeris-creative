@@ -6,7 +6,7 @@
   "4": "dependencies",
   "5": "layout.tsx",
   "6": "email.ts",
-  "7": "[slug]/page.tsx",
+  "7": "services/page.tsx",
   "8": "Celeris Creative — Sitemap, User Journey & Wireframes",
   "9": "Celeris Creative — Legacy Content Archive",
   "10": "Celeris Creative — Design System & Style Guide",
@@ -20,6 +20,5 @@
   "18": "template.tsx",
   "19": "pages.mjs",
   "20": "verify-cta.mjs",
-  "21": "gen-icons.mjs",
-  "22": "ContactClient.tsx"
+  "21": "gen-icons.mjs"
 }

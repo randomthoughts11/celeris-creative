@@ -1,16 +1,16 @@
 # Graph Report - celeris website  (2026-09-28)
 
 ## Corpus Check
-- 62 files · ~1,118,542 words
+- 62 files · ~1,118,643 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 316 nodes · 556 edges · 23 communities (19 shown, 4 thin omitted)
+- 317 nodes · 558 edges · 22 communities (18 shown, 4 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `91a2caaa`
+- Built from commit: `09caec4d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -22,7 +22,7 @@
 - dependencies
 - layout.tsx
 - email.ts
-- [slug]/page.tsx
+- services/page.tsx
 - Celeris Creative — Sitemap, User Journey & Wireframes
 - Celeris Creative — Legacy Content Archive
 - Celeris Creative — Design System & Style Guide
@@ -33,7 +33,6 @@
 - screenshot.mjs
 - sections.mjs
 - gen-icons.mjs
-- ContactClient.tsx
 
 ## God Nodes (most connected - your core abstractions)
 1. `breadcrumbSchema()` - 23 edges
@@ -48,29 +47,29 @@
 10. `Celeris Creative — Sitemap, User Journey & Wireframes` - 7 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `ContactPage()` --calls--> `breadcrumbSchema()`  [EXTRACTED]
-  src/app/contact/page.tsx → src/lib/seo.ts
+- `WorkPage()` --calls--> `breadcrumbSchema()`  [EXTRACTED]
+  src/app/work/page.tsx → src/lib/seo.ts
 - `AboutPage()` --calls--> `breadcrumbSchema()`  [EXTRACTED]
   src/app/about/page.tsx → src/lib/seo.ts
 - `POST()` --calls--> `sendContactEmail()`  [EXTRACTED]
   src/app/api/contact/route.ts → src/lib/email.ts
 - `generateStaticParams()` --calls--> `getAllSlugs()`  [EXTRACTED]
   src/app/blog/[slug]/page.tsx → src/lib/blog.ts
-- `generateMetadata()` --calls--> `pageMetadata()`  [EXTRACTED]
-  src/app/blog/[slug]/page.tsx → src/lib/seo.ts
+- `BlogIndexPage()` --calls--> `breadcrumbSchema()`  [EXTRACTED]
+  src/app/blog/page.tsx → src/lib/seo.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (23 total, 4 thin omitted)
+## Communities (22 total, 4 thin omitted)
 
 ### Community 0 - "data.ts"
-Cohesion: 0.07
-Nodes (42): metadata, VALUES, HomePage(), metadata, metadata, PLANS, metadata, PageHero() (+34 more)
+Cohesion: 0.09
+Nodes (25): HomePage(), metadata, metadata, WorkPage(), AISection(), FeaturedWork(), Industries(), Services() (+17 more)
 
 ### Community 1 - "seo.ts"
-Cohesion: 0.11
-Nodes (30): AboutPage(), BlogIndexPage(), metadata, CookiesPage(), doc, metadata, doc, metadata (+22 more)
+Cohesion: 0.07
+Nodes (48): AboutPage(), BlogIndexPage(), metadata, BlogPostPage(), generateMetadata(), generateStaticParams(), Props, ContactClient() (+40 more)
 
 ### Community 2 - "devDependencies"
 Cohesion: 0.07
@@ -86,15 +85,15 @@ Nodes (21): clsx, framer-motion, gsap, @gsap/react, lenis, next, nodemailer, dep
 
 ### Community 5 - "layout.tsx"
 Cohesion: 0.13
-Nodes (16): bricolage, instrument, inter, jetbrains, metadata, RootLayout(), viewport, Footer() (+8 more)
+Nodes (15): bricolage, instrument, inter, jetbrains, metadata, RootLayout(), viewport, Footer() (+7 more)
 
 ### Community 6 - "email.ts"
 Cohesion: 0.27
 Nodes (12): ContactPayload, GET(), POST(), buildBodies(), ContactMail, emailConfigStatus(), escapeHtml(), recipient() (+4 more)
 
-### Community 7 - "[slug]/page.tsx"
-Cohesion: 0.27
-Nodes (10): BlogPostPage(), generateMetadata(), generateStaticParams(), Props, sitemap(), BLOG_POSTS, BlogPost, getAllSlugs() (+2 more)
+### Community 7 - "services/page.tsx"
+Cohesion: 0.12
+Nodes (20): metadata, VALUES, metadata, PLANS, PageHero(), Props, FAQ(), FinalCTA() (+12 more)
 
 ### Community 8 - "Celeris Creative — Sitemap, User Journey & Wireframes"
 Cohesion: 0.15
@@ -120,10 +119,6 @@ Nodes (4): alt, contentType, runtime, size
 Cohesion: 0.40
 Nodes (3): header, sizes, svg
 
-### Community 22 - "ContactClient.tsx"
-Cohesion: 0.17
-Nodes (9): ContactClient(), EXPECT, SERVICES_OPTIONS, ContactPage(), metadata, SmsConsent(), SmsOptInForm(), SITE (+1 more)
-
 ## Knowledge Gaps
 - **130 isolated node(s):** `nextConfig`, `name`, `version`, `private`, `dev` (+125 more)
   These have ≤1 connection - possible missing edges or undocumented components.
@@ -132,17 +127,17 @@ Nodes (9): ContactClient(), EXPECT, SERVICES_OPTIONS, ContactPage(), metadata, S
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `breadcrumbSchema()` connect `seo.ts` to `data.ts`, `ContactClient.tsx`, `[slug]/page.tsx`?**
+- **Why does `breadcrumbSchema()` connect `seo.ts` to `data.ts`, `services/page.tsx`?**
   _High betweenness centrality (0.028) - this node is a cross-community bridge._
-- **Why does `SITE` connect `ContactClient.tsx` to `data.ts`, `seo.ts`, `layout.tsx`, `email.ts`, `[slug]/page.tsx`?**
+- **Why does `SITE` connect `data.ts` to `seo.ts`, `layout.tsx`, `email.ts`?**
   _High betweenness centrality (0.020) - this node is a cross-community bridge._
-- **Why does `JsonLd()` connect `seo.ts` to `data.ts`, `layout.tsx`, `ContactClient.tsx`, `[slug]/page.tsx`?**
+- **Why does `JsonLd()` connect `seo.ts` to `data.ts`, `layout.tsx`, `services/page.tsx`?**
   _High betweenness centrality (0.016) - this node is a cross-community bridge._
 - **What connects `nextConfig`, `name`, `version` to the rest of the system?**
   _130 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `data.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.06873706004140787 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0859465737514518 - nodes in this community are weakly interconnected._
 - **Should `seo.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.1141025641025641 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06971153846153846 - nodes in this community are weakly interconnected._
 - **Should `devDependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.07142857142857142 - nodes in this community are weakly interconnected._

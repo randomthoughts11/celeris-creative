@@ -215,74 +215,104 @@ export const FAQS = [
 
 export const FEATURED_WORK = [
   {
-    id: "veda-wellness",
-    client: "Veda Wellness Co.",
+    id: "vande-wellness",
+    client: "Vande Wellness",
+    domain: "vandewellness.com",
     sector: "Ayurveda & Wellness",
-    title: "From local clinic to national brand",
+    title: "A booking engine for physician-led Ayurveda",
     summary:
-      "Complete rebrand, e-commerce build, and an AI follow-up system that turned a single-city practice into a national wellness label.",
-    services: ["Branding", "Web", "AI Automation"],
+      "Website, booking flows, and retreat sales for a multi-location Ayurveda clinic group — consultations, 20+ therapies, and Panchakarma retreats across the US, Mexico, and India in one place.",
+    services: ["Web Design", "Booking & CRM", "SEO"],
     metrics: [
-      { value: "212%", label: "revenue growth in 9 months" },
-      { value: "4.1x", label: "return on ad spend" },
+      { value: "8", label: "Panchakarma retreat destinations" },
+      { value: "20+", label: "bookable therapies online" },
     ],
     theme: "#8478ff",
   },
   {
-    id: "bloom-clinics",
-    client: "Bloom Clinics",
-    sector: "Health & Medical",
-    title: "A patient pipeline that runs itself",
+    id: "vandecart",
+    client: "VandeCart",
+    domain: "vandecart.com",
+    sector: "E-commerce",
+    title: "An Ayurvedic marketplace for US shoppers",
     summary:
-      "New identity, conversion-focused website, and automated booking flows across three locations — with every lead answered in under a minute.",
-    services: ["Web", "CRM Systems", "Paid Media"],
+      "Storefront for authentic Ayurvedic medicines, oils, teas, and therapy supplies — with a product-request flow that turns customer demand into new inventory.",
+    services: ["E-commerce", "Web Design", "Marketing"],
     metrics: [
-      { value: "3,400+", label: "patient bookings automated" },
-      { value: "58%", label: "lower cost per acquisition" },
-    ],
-    theme: "#6ee7f9",
-  },
-  {
-    id: "operators-podcast",
-    client: "The Operators",
-    sector: "Media & Content",
-    title: "One recording, thirty pieces of content",
-    summary:
-      "A podcast production engine with AI clipping, show notes, and distribution — publishing daily across five channels from one weekly session.",
-    services: ["Content Systems", "Podcast Production"],
-    metrics: [
-      { value: "10x", label: "content output, same team" },
-      { value: "126k", label: "new followers in 6 months" },
+      { value: "6+", label: "trusted Ayurvedic brands stocked" },
+      { value: "On request", label: "sourcing for products not yet listed" },
     ],
     theme: "#e9c88f",
   },
   {
-    id: "havenly-home",
-    client: "Havenly Home",
-    sector: "E-commerce",
-    title: "Scaling a store past seven figures",
+    id: "vande-university",
+    client: "Vande University",
+    domain: "vandeuniversity.com",
+    sector: "Education",
+    title: "Ayurveda education, online and global",
     summary:
-      "Full-funnel creative, lifecycle email, and a retention system that lifted repeat purchase rate while ads scaled profitably.",
-    services: ["Performance Marketing", "Creative", "Email"],
+      "Learning platform for the educational wing of Vande Wellness Group — certified Ayurveda, nutrition, cosmetology, and yoga-teacher courses with live and self-paced modules.",
+    services: ["Web Design", "Learning Platform", "Content"],
     metrics: [
-      { value: "$1.2M", label: "attributed revenue in year one" },
-      { value: "3.2x", label: "blended ROAS at scale" },
+      { value: "6", label: "certified online courses" },
+      { value: "2", label: "countries with Vande centers" },
+    ],
+    theme: "#6ee7f9",
+  },
+  {
+    id: "total-health-centers",
+    client: "Total Health Centers",
+    domain: "totalhealthcenters.com",
+    sector: "Integrative Medicine",
+    title: "Integrative care, explained clearly",
+    summary:
+      "Brand and website for an insurance-friendly integrative medicine practice — 12-week heart, brain, and longevity programs combining modern medicine, Ayurveda, and AI-assisted diagnostics.",
+    services: ["Branding", "Web Design", "Patient Acquisition"],
+    metrics: [
+      { value: "12-week", label: "structured treatment programs" },
+      { value: "3", label: "core programs: heart, brain, longevity" },
     ],
     theme: "#a89eff",
+  },
+  {
+    id: "ayurdoc",
+    client: "AyurDoc",
+    domain: "ayurdoc.ai",
+    sector: "Health AI",
+    title: "An AI copilot for the Ayurvedic consult",
+    summary:
+      "Positioning and product site for an AI consult layer for US Ayurvedic practitioners — live transcription in the room and signed Pancha Nidana notes instead of after-hours SOAP rewrites.",
+    services: ["AI Product", "Positioning", "Web Design"],
+    metrics: [
+      { value: "2", label: "in-room languages: Hindi & Kannada" },
+      { value: "0", label: "SOAP rewrites after the visit" },
+    ],
+    theme: "#8478ff",
+  },
+  {
+    id: "thc-cdss",
+    client: "THC Clinical Decision Support",
+    domain: "thc-cdss.ai",
+    sector: "Clinical AI",
+    title: "Decision support for integrative care teams",
+    summary:
+      "A secure clinical decision support platform for Total Health Centers — AI-assisted assessments that help physicians identify root causes and plan personalized 12-week treatment.",
+    services: ["AI & Automation", "Product Design", "Secure Web App"],
+    metrics: [
+      { value: "AI", label: "assisted clinical assessments" },
+      { value: "Secure", label: "login-protected care-team platform" },
+    ],
+    theme: "#6ee7f9",
   },
 ];
 
 export const TRUSTED_BY = [
-  "Veda Wellness",
-  "Bloom Clinics",
-  "The Operators",
-  "Havenly Home",
-  "Reed & Associates",
-  "Aura Botanicals",
-  "Northside Realty",
-  "Lumen SaaS",
-  "Plano Dental Co.",
-  "Kindred Coffee",
+  "Vande Wellness",
+  "VandeCart",
+  "Vande University",
+  "Total Health Centers",
+  "AyurDoc",
+  "THC CDSS",
 ];
 
 export const WHY_CELERIS = [

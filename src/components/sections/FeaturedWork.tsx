@@ -24,7 +24,7 @@ function DeviceMockup({
         <span className="h-2.5 w-2.5 rounded-full bg-snow/15" />
         <span className="h-2.5 w-2.5 rounded-full bg-snow/15" />
         <span className="ml-3 hidden rounded-md bg-ink px-3 py-1 font-mono text-[10px] text-mist sm:block">
-          {project.client.toLowerCase().replace(/[^a-z]/g, "")}.com
+          {project.domain}
         </span>
       </div>
       {/* Abstract site content */}
@@ -126,7 +126,17 @@ function WorkCard({
           <h3 className="font-display mt-6 text-3xl font-semibold leading-tight tracking-tight text-snow sm:text-4xl">
             {project.title}
           </h3>
-          <p className="mt-2 font-serif-accent text-lg text-fog">{project.client}</p>
+          <p className="mt-2 font-serif-accent text-lg text-fog">
+            {project.client} ·{" "}
+            <a
+              href={`https://${project.domain}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline-offset-4 hover:text-snow hover:underline"
+            >
+              {project.domain} ↗
+            </a>
+          </p>
           <p className="mt-5 max-w-md text-sm leading-relaxed text-fog sm:text-base">
             {project.summary}
           </p>
@@ -194,7 +204,7 @@ export function FeaturedWork() {
             eyebrow="Selected work"
             title="Systems that"
             accent="shipped & scaled."
-            description="A snapshot of growth systems in production — from wellness brands to media companies."
+            description="Live systems for real clients — from Ayurveda clinics and e-commerce to clinical AI."
           />
           <Link
             href="/work"
